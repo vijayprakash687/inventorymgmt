@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <StartupObject>InventoryMgmt.Console.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InventoryMgmt.App\InventoryMgmt.App.csproj" />
+    <ProjectReference Include="..\InventoryMgmt.Domain\InventoryMgmt.Domain.csproj" />
+    <ProjectReference Include="..\InventoryMgmt.Persistence.InMemory\InventoryMgmt.Persistence.InMemory.csproj" />
+    <ProjectReference Include="..\InventoryMgmt.Persistence\InventoryMgmt.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

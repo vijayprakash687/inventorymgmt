@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InventoryMgmt.Domain\InventoryMgmt.Domain.csproj" />
+    <ProjectReference Include="..\InventoryMgmt.Persistence\InventoryMgmt.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
