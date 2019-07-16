@@ -1,7 +1,6 @@
 ﻿using InventoryMgmt.Core.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace InventoryMgmt.App.Manager
 {
@@ -13,12 +12,16 @@ namespace InventoryMgmt.App.Manager
             _inventoryCommands.Add(inventoryCommand);
         }
 
+        public bool HasPendingCommands
+        {
+            get { return _inventoryCommands.Any(x => !x.IsCompleted); }
+        }
         public void ProcessInventoryCommands()
         {
-            // Apply transactions in the order they were added.
-            foreach (IInventoryCommand inventoryCommand in _inventoryCommands)
+            foreach (IInventoryCommand inventoryCommand in _inventoryCommands.Where(x=>!x.IsCompleted))
             {
                 inventoryCommand.Execute();
+                inventoryCommand.IsCompleted = true;
             }
         }
     }

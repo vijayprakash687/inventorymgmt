@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace InventoryMgmt.Core.Interfaces
+﻿namespace InventoryMgmt.Core.Interfaces
 {
     public interface IInventoryCommand
     {
+        bool IsCompleted { get; set; }
         void Execute();
     }
 

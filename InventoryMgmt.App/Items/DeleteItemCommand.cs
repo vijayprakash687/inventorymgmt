@@ -1,21 +1,21 @@
-﻿using InventoryMgmt.Core.Interfaces;
-using InventoryMgmt.Domain.Entities;
-using InventoryMgmt.Domain.Enums;
-using InventoryMgmt.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+
+using InventoryMgmt.Core.Interfaces;
+using InventoryMgmt.Persistence.Entities;
+using InventoryMgmt.Persistence.Interfaces;
 
 namespace InventoryMgmt.App.Items
 {
     public class DeleteItemCommand : IInventoryCommand
     {
-        protected readonly IRepository<Item> _itemRepository;
+        protected readonly IRepository<ItemData> _itemRepository;
         protected readonly string _name;
-        public DeleteItemCommand(IRepository<Item> itemRepository,string name) 
+        public bool IsCompleted { get; set; }
+        public DeleteItemCommand(IRepository<ItemData> itemRepository,string name) 
         {
             _itemRepository = itemRepository;            
             _name = name;
+            IsCompleted = false;
         }
 
        
@@ -28,12 +28,11 @@ namespace InventoryMgmt.App.Items
 
             var item = _itemRepository.Get(_name);
             if (item == null)
-                throw new Exception($"Item {_name} not found in repository");            
-            
-            _itemRepository.Delete(item);
-            
-        }
+            {
+                throw new Exception($"Item {_name} not found in repository");
+            }
 
-        
+            _itemRepository.Delete(item);            
+        }        
     }
 }

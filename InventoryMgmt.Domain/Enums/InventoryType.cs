@@ -4,7 +4,7 @@ using System.Text;
 
 namespace InventoryMgmt.Domain.Enums
 {
-    public enum InventoryUpdates
+    public enum InventoryType
     {
         None,
         Buy,

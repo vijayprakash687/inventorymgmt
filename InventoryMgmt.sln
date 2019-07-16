@@ -7,17 +7,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7A2DD53D-0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryMgmt.App", "InventoryMgmt.App\InventoryMgmt.App.csproj", "{BD5F870B-94BF-4095-A2F2-1250151BA9B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryMgmt.Domain", "InventoryMgmt.Domain\InventoryMgmt.Domain.csproj", "{1BE8A7BB-2F9C-4BDA-ABBD-35DABF36F03E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryMgmt.Domain", "InventoryMgmt.Domain\InventoryMgmt.Domain.csproj", "{1BE8A7BB-2F9C-4BDA-ABBD-35DABF36F03E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1DAE98F8-C580-41DC-9FDC-7C70925155DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryMgmt.Persistence", "InventoryMgmt.Persistence\InventoryMgmt.Persistence.csproj", "{74A5667F-13C1-4C25-9885-2A1831C68BFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryMgmt.Persistence", "InventoryMgmt.Persistence\InventoryMgmt.Persistence.csproj", "{74A5667F-13C1-4C25-9885-2A1831C68BFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryMgmt.Persistence.InMemory", "InventoryMgmt.Persistence.InMemory\InventoryMgmt.Persistence.InMemory.csproj", "{800AD0EA-B2E4-456F-83C9-9959067B263F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryMgmt.Persistence.InMemory", "InventoryMgmt.Persistence.InMemory\InventoryMgmt.Persistence.InMemory.csproj", "{800AD0EA-B2E4-456F-83C9-9959067B263F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{8246FA05-47DF-40CE-9E5A-CF9399F7080E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryMgmt.Console", "InventoryMgmt.Console\InventoryMgmt.Console.csproj", "{CE42B662-9C79-461D-A8FA-E23CFAFF2460}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryMgmt.Console", "InventoryMgmt.Console\InventoryMgmt.Console.csproj", "{CE42B662-9C79-461D-A8FA-E23CFAFF2460}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D37A1FB1-9353-4EFE-95EB-979E31513D6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryMgmt.Persistence.InMemory.Tests", "InventoryMgmt.Persistence.InMemory.Tests\InventoryMgmt.Persistence.InMemory.Tests.csproj", "{64CBE25E-28BF-4AB0-83E7-EDAA1D585FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryMgmt.App.Tests", "InventoryMgmt.App.Tests\InventoryMgmt.App.Tests.csproj", "{738D6F7A-4466-4BEA-A952-171426EC8B94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +51,14 @@ Global
 		{CE42B662-9C79-461D-A8FA-E23CFAFF2460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE42B662-9C79-461D-A8FA-E23CFAFF2460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE42B662-9C79-461D-A8FA-E23CFAFF2460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64CBE25E-28BF-4AB0-83E7-EDAA1D585FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64CBE25E-28BF-4AB0-83E7-EDAA1D585FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64CBE25E-28BF-4AB0-83E7-EDAA1D585FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64CBE25E-28BF-4AB0-83E7-EDAA1D585FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{738D6F7A-4466-4BEA-A952-171426EC8B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{738D6F7A-4466-4BEA-A952-171426EC8B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{738D6F7A-4466-4BEA-A952-171426EC8B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{738D6F7A-4466-4BEA-A952-171426EC8B94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +69,8 @@ Global
 		{74A5667F-13C1-4C25-9885-2A1831C68BFD} = {1DAE98F8-C580-41DC-9FDC-7C70925155DC}
 		{800AD0EA-B2E4-456F-83C9-9959067B263F} = {1DAE98F8-C580-41DC-9FDC-7C70925155DC}
 		{CE42B662-9C79-461D-A8FA-E23CFAFF2460} = {8246FA05-47DF-40CE-9E5A-CF9399F7080E}
+		{64CBE25E-28BF-4AB0-83E7-EDAA1D585FCF} = {D37A1FB1-9353-4EFE-95EB-979E31513D6F}
+		{738D6F7A-4466-4BEA-A952-171426EC8B94} = {D37A1FB1-9353-4EFE-95EB-979E31513D6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B153B53-980E-4462-854A-B938637CAFF6}

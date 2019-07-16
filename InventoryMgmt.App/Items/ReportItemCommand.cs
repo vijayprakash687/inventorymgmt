@@ -1,73 +1,92 @@
-﻿using InventoryMgmt.Core.Interfaces;
-using InventoryMgmt.Domain.Entities;
-using InventoryMgmt.Domain.Enums;
-using InventoryMgmt.Persistence;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+using InventoryMgmt.Core.Interfaces;
 using InventoryMgmt.App.Entities;
 using InventoryMgmt.App.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
+using InventoryMgmt.Persistence.Interfaces;
+using InventoryMgmt.Persistence.Entities;
 
 namespace InventoryMgmt.App.Items
 {
     public class ReportItemCommand : IInventoryCommand
     {
-        readonly IRepository<Item> _itemRepository;
-        static decimal lastReportProfit = 0;
-        static IList<Report> reports;
-        static int _counter = 1;
-        decimal latestProfit = 0;
+        readonly IItemRepository<ItemData> _itemRepository;
+        public bool IsCompleted { get; set; }
+        static IList<ReportModel> reports;
+        static int _counter = 1;        
+
         static ReportItemCommand()
         {
-            reports = new List<Report>();
+            reports = new List<ReportModel>();
+            
         }
-        public ReportItemCommand(IRepository<Item> itemRepository)
+
+        public ReportItemCommand(IItemRepository<ItemData> itemRepository)
         {
-            _itemRepository = itemRepository;            
+            _itemRepository = itemRepository;
+            IsCompleted = false;
         }
+
         public void Execute()
         {
-            var items = ToCollection(_itemRepository.GetAll());
+            var items = ToCollection(_itemRepository.GetAll().OrderBy(x=>x.Name));
             UpdateReportCollection(items);
-            var header = String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|", "Item Name", "Bought At", "Sold At", "Value");
+
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("                             Inventory Report                             ");
+            Console.WriteLine("");
+            var header = String.Format("|{0,15}|{1,15}|{2,15}|{3,15}|", "Item Name", "Bought At", "Sold At", "Value");
             Console.WriteLine(header);
-            var header1 = string.Format("|{0,10}|{1,10}|{2,10}|{3,10}|", "--------", "-------", "-------", "-------");
+            var header1 = string.Format("|{0,15}|{1,15}|{2,15}|{3,15}|", "--------", "-------", "-------", "-------");
             Console.WriteLine(header1);
+
             foreach(var item in items.Items)
             {
-                var row = string.Format("|{0,10}|{1,10}|{2,10}|{3,10}|", item.Name, item.CostPrice, item.Quantity, (item.Quantity*item.CostPrice));
+                var row = string.Format("|{0,15}|{1,15}|{2,15}|{3,15}|", item.Name, item.CostPrice, item.Quantity, (item.Quantity*item.CostPrice));
                 Console.WriteLine(row);
             }
-            Console.WriteLine("------------------------------------------------------------------------");
-            var footer = String.Format("|{0,30}|{1,10}|", "Total Value", items.TotalValue);
-            var footer1 = String.Format("|{0,30}|{1,10}|", "Profit since previous report", latestProfit);
+
+            Console.WriteLine("--------------------------------------------------------------------------------------------");
+
+            var footer = String.Format("|{0,15} {1,15} {2,15} {3,15}|", "Total Value","","", items.TotalValue);
+            var footer1 = String.Format("|{0,15} {1,15} {2,15} |", "Profit since previous report","", items.ProfitAmount);
             Console.WriteLine(footer);
             Console.WriteLine(footer1);
         }
 
-        private void UpdateReportCollection(ItemCollection items)
+        #region Private Methods
+        private void UpdateReportCollection(ItemVM items)
         {
-            var lastReportProfit = reports.Count > 0 ? reports.OrderBy(x => x.ReportId).Last().Profit : 0;
-            var lastReportTotalValue = reports.Count > 0 ? reports.OrderBy(x => x.ReportId).Last().TotalValue : 0;
-            latestProfit = reports.Count == 0? items.Profit :(items.Profit - lastReportProfit + (lastReportTotalValue - items.TotalValue));
-            reports.Add(new Report
+            var lastReport = reports.Count > 0 ? reports.OrderBy(x => x.ReportId).Last() : null;
+            var profitAmount = reports.Count > 0 ? _itemRepository.GetProfitWithInTimePeriod(lastReport.CreatedTime) :
+                                                                                                items.ProfitAmount;
+            reports.Add(new ReportModel
             {
                 ReportId = _counter,
-                Profit = latestProfit,
+                ProfitAmount = profitAmount,
                 TotalValue = items.TotalValue
             });
 
+            items.ProfitAmount = profitAmount;
             _counter += 1;
         }
-        private ItemCollection ToCollection(IEnumerable<Item> items)
+
+        private ItemVM ToCollection(IEnumerable<ItemData> items)
         {            
-            var itemCollection = new ItemCollection
+            var itemVM = new ItemVM
             {
                 Items = items,
                 TotalValue = items.TotalValue(),
-                Profit = items.Profit()
+                ProfitAmount = items.Profit()
             };
-            return itemCollection;
+
+            return itemVM;
         }
+
+        #endregion
     }
 }

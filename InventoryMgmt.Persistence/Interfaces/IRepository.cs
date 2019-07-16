@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace InventoryMgmt.Persistence
+namespace InventoryMgmt.Persistence.Interfaces
 {
     public interface IRepository<T>
     {
